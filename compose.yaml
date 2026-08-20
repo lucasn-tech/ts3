@@ -1,0 +1,17 @@
+services:
+  teamspeak:
+    image: teamspeak:latest
+    container_name: teamspeak
+    restart: unless-stopped
+    environment:
+      TS3SERVER_LICENSE: accept
+    ports:
+      - "${TS3_VOICE_PORT:-9987}:9987/udp"
+      - "${TS3_FILETRANSFER_PORT:-30033}:30033/tcp"
+      - "127.0.0.1:${TS3_QUERY_PORT:-10011}:10011/tcp"
+    volumes:
+      - teamspeak-data:/var/ts3server
+
+volumes:
+  teamspeak-data:
+
